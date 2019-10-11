@@ -106,7 +106,7 @@ def run(robot, tau, n=100, speed=1.0):
     x_trajectory = []
     y_trajectory = []
     for _ in range(n):
-        cte = abs(robot.y)
+        cte = robot.y
         steering_angle = -tau * cte
         robot.move(steering_angle, distance=1)
         
@@ -122,4 +122,4 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 8))
 ax1.plot(x_trajectory, y_trajectory, 'g', label='P controller')
 ax1.plot(x_trajectory, np.zeros(n), 'r', label='reference')
 
-plt.show()
+# plt.show()
