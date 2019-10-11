@@ -106,7 +106,9 @@ def run(robot, tau, n=100, speed=1.0):
     x_trajectory = []
     y_trajectory = []
     for _ in range(n):
-        robot.move(tau * abs(robot.y), distance=1)
+        cte = abs(robot.y)
+        steering_angle = -tau * cte
+        robot.move(steering_angle, distance=1)
         
         x_trajectory.append(robot.x)
         y_trajectory.append(robot.y)
