@@ -110,7 +110,17 @@ robot.set(0, 1, 0)
 def run(robot, tau_p, tau_d, tau_i, n=100, speed=1.0):
     x_trajectory = []
     y_trajectory = []
-    # TODO: your code here
+    
+    cte_last = robot.y
+    for _ in range(n):
+        cte = robot.y
+        angle = (-tau_p * cte) - tau_d * (cte - cte_last)
+        robot.move(angle, speed)
+        x_trajectory.append(robot.x)
+        y_trajectory.append(robot.y)
+        cte_last = cte
+
+
     return x_trajectory, y_trajectory
 
 
