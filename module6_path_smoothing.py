@@ -33,7 +33,7 @@ path = [[0., 0.],
         [4., 3.],
         [4., 4.]]
 
-def smooth(path, weight_data = 0.5, weight_smooth = 0.2, tolerance = 0.000001):
+def smooth(path, weight_data = 0.5, weight_smooth = 0.4, tolerance = 0.000001):
 
     # Make a deep copy of path into newpath
     newpath = deepcopy(path)
@@ -48,10 +48,19 @@ def smooth(path, weight_data = 0.5, weight_smooth = 0.2, tolerance = 0.000001):
         for i in range(1, len(path)-1):
             for j in range(len(path[0])):
                 old = newpath[i][j]
-                newpath[i][j] += weight_data * (path[i][j] - newpath[i][j]) + \
-                                weight_smooth * (newpath[i-1][j] + newpath[i+1][j] - (2.0 * newpath[i][j]))
+                newpath[i][j] += weight_data * (path[i][j] - newpath[i][j]) 
+                newpath[i][j] += weight_smooth * (newpath[i-1][j] + newpath[i+1][j] - (2.0 * newpath[i][j]))
+                # newpath[i][j] += weight_data * (path[i][j] - newpath[i][j]) + \
+                #                 weight_smooth * (newpath[i-1][j] + newpath[i+1][j] - (2.0 * newpath[i][j]))
                 change += abs(old - newpath[i][j])
             
     return newpath # Leave this line for the grader!
 
-printpaths(path,smooth(path))
+smooth_path = smooth(path, weight_data=0.4, weight_smooth=0.3)
+printpaths(path, smooth_path)
+
+import matplotlib.pyplot as plt
+plt.plot([x[0] for x in smooth_path], [x[1] for x in smooth_path])
+# plt.ylabel('some numbers')
+plt.show()
+
