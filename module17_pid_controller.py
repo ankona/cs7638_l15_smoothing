@@ -112,9 +112,11 @@ def run(robot, tau_p, tau_d, tau_i, n=100, speed=1.0):
     y_trajectory = []
     
     cte_last = robot.y
+    cte_sum = 0
     for _ in range(n):
         cte = robot.y
-        angle = (-tau_p * cte) - tau_d * (cte - cte_last)
+        cte_sum += cte
+        angle = (-tau_p * cte) - tau_d * (cte - cte_last) - tau_i * cte_sum
         robot.move(angle, speed)
         x_trajectory.append(robot.x)
         y_trajectory.append(robot.y)
@@ -130,3 +132,5 @@ n = len(x_trajectory)
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8,8))
 ax1.plot(x_trajectory, y_trajectory, 'g', label='PID controller')
 ax1.plot(x_trajectory, np.zeros(n), 'r', label='reference')
+
+plt.show()
