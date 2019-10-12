@@ -131,8 +131,10 @@ def run(robot, tau_p, tau_d, n=100, speed=1.0):
         cte_last = cte
 
     return x_trajectory, y_trajectory
-    
-x_trajectory, y_trajectory = run(robot, 0.2, 3.0)
+
+import math
+robot.set_steering_drift(10. / 180. *  math.pi)
+x_trajectory, y_trajectory = run(robot, 0.2, 0.0)
 n = len(x_trajectory)
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 8))
