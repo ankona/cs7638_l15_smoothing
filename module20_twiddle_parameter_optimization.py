@@ -165,7 +165,6 @@ def twiddle(tol=0.2):
                 else:
                     p[i] += dp[i]
                     dp[i] *= 0.9
-                    # x_trajectory, y_trajectory, err = run(robot, p)
 
     
     return p, best_err
