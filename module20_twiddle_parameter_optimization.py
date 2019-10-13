@@ -156,8 +156,8 @@ def twiddle(tol=0.2):
                 dp[i] *= 1.1
             else:
                 p[i] -= 2 * dp[i]
-                # robot = make_robot()
-                # x_trajectory, y_trajectory, err = run(robot, p)
+                robot = make_robot()
+                x_trajectory, y_trajectory, err = run(robot, p)
 
                 if err < best_err:
                     best_err = err
@@ -165,8 +165,6 @@ def twiddle(tol=0.2):
                 else:
                     p[i] += dp[i]
                     dp[i] *= 0.9
-
-                    # robot = make_robot()
                     # x_trajectory, y_trajectory, err = run(robot, p)
 
     
